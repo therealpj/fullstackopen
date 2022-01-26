@@ -5,24 +5,38 @@ const Header = () => (
   <h1>Please give your feedback!</h1>
 )
 
+const Button = (props) => (
+  <button onClick={props.handleClick}> {props.text} </button>
+)
+
+const StatisticsLine = ({ text, value }) => (
+  <tr>
+    <td>{text}</td>
+    <td>{value}</td>
+  </tr>
+)
 const Statistics = (props) => {
   const total = props.good + props.neutral + props.bad
   const percentage = (props.good / total) * 100
-
+  const average = (props.good - props.bad) / total
   if (total > 0) {
     return (
       <>
-        <h1>Statistics</h1>
-        <p>Good: {props.good}</p>
-        <p>Neutral: {props.neutral}</p>
-        <p>Bad: {props.bad}</p>
-        <p>Total: {total} </p>
-        <p>Average: {(props.good - props.bad) / total} </p>
-        <p>Positive percentage: {percentage}%</p>
+        <table>
+          <tbody>
+            <tr><th>Statistics</th></tr>
+            <StatisticsLine text="Good" value={props.good} />
+            <StatisticsLine text="Neutral" value={props.neutral} />
+            <StatisticsLine text="Bad" value={props.bad} />
+            <StatisticsLine text="Total" value={total} />
+            <StatisticsLine text="Average" value={average} />
+            <StatisticsLine text="Positive Percentage" value={percentage + " %"} />
+          </tbody>
+        </table>
       </>
     )
   }
-  return (<h2><br></br>Please give at least one feedback to show statistics</h2>)
+  return (<h4><br></br>Please give at least one feedback to show statistics</h4>)
 }
 
 const App = () => {
@@ -34,9 +48,9 @@ const App = () => {
   return (
     <div>
       <Header />
-      <button onClick={() => setGood(good + 1)}> Good :) </button>
-      <button onClick={() => setNeutral(neutral + 1)}> Neutral :| </button>
-      <button onClick={() => setBad(bad + 1)}> Bad :(</button>
+      <Button handleClick={() => setGood(good + 1)} text="Good :)" />
+      <Button handleClick={() => setNeutral(neutral + 1)} text="Neutral :|" />
+      <Button handleClick={() => setBad(bad + 1)} text="Bad :(" />
       <Statistics good={good} neutral={neutral} bad={bad} />
     </div>
   )
