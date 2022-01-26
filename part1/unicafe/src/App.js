@@ -6,12 +6,17 @@ const Header = () => (
 )
 
 const Statistics = (props) => {
+  const total = props.good + props.neutral + props.bad
+  const percentage = (props.good / total) * 100
   return (
     <>
       <h1>Statistics</h1>
       <p>Good: {props.good}</p>
       <p>Neutral: {props.neutral}</p>
       <p>Bad: {props.bad}</p>
+      <p>Total: {total} </p>
+      <p>Average: {(props.good - props.bad) / total} </p>
+      <p>Positive percentage: {percentage}%</p>
     </>
   )
 }
