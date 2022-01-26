@@ -5,6 +5,12 @@ const Button = ({ handleClick, text }) => (
   <button onClick={handleClick}>{text}</button>
 )
 
+const Anecdote = ({ anecdote }) => (
+  <p><b>{anecdote}</b></p>
+)
+
+const Header = ({ text }) => (<h2>{text}</h2>)
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often',
@@ -31,10 +37,13 @@ const App = () => {
 
   return (
     <div>
-      <p><b>{anecdotes[selected]}</b></p>
+      <Header text="Anecdote of the day" />
+      <Anecdote anecdote={anecdotes[selected]} />
       <Button handleClick={nextAnecdote} text="Next anecdote" />
       <Button handleClick={vote} text="Vote" />
       <p>Votes: {votes[selected]}</p>
+      <Header text="Anecdote with most votes" />
+      <Anecdote anecdote={anecdotes[votes.indexOf(Math.max(...votes))]} />
     </div>
   )
 }
