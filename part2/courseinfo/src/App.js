@@ -9,10 +9,20 @@ const Course = (props) => {
         </p>
       )}
 
+      <Total course={props.course} />
     </>
   )
 }
 
+const Total = (props) => {
+  const total = props.course.parts.reduce((previousValue, currentValue) => ({ exercises: previousValue.exercises + currentValue.exercises }))
+
+  return (
+    <>
+      <p><b>There are a total of {total.exercises} exercises in this course.</b></p>
+    </>
+  )
+}
 
 const App = () => {
   const course = {
