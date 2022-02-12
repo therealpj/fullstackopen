@@ -9,10 +9,18 @@ const App = () => {
   const addPerson = (event) => {
     event.preventDefault()
 
-    const personObject = {
-      name: newName,
+    var uniqueName = true
+    persons.forEach((person) => uniqueName = newName !== person.name)
+
+    if (uniqueName) {
+      const personObject = {
+        name: newName,
+      }
+      setPersons(persons.concat(personObject))
     }
-    setPersons(persons.concat(personObject))
+    else {
+      alert(`${newName} is already taken.`)
+    }
     setNewName('')
   }
 
